@@ -8,7 +8,7 @@ export default class News extends Component {
 
   static defaultProps = {
     pageLimit: 6,
-    category:'everything',
+    category:'',
     country: 'in'
   }
 
