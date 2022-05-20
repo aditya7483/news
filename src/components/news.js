@@ -8,6 +8,7 @@ export default class News extends Component {
 
   static defaultProps = {
     pageLimit: 6,
+    category:'everything',
     country: 'in'
   }
 
@@ -28,7 +29,7 @@ export default class News extends Component {
   }
 
   async componentDidMount() {
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&apiKey=445f58e1d17c4229b23e3965d19197c7&page=1&pagesize=${this.props.pageLimit}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&apiKey=445f58e1d17c4229b23e3965d19197c7&category=${this.props.category}&page=1&pagesize=${this.props.pageLimit}`;
     let res = await fetch(url);
     let data = await res.json();
     this.setState({
@@ -42,7 +43,7 @@ export default class News extends Component {
 
 
   fetchData = async () => {
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&apiKey=445f58e1d17c4229b23e3965d19197c7&page=${this.state.page + 1}&pagesize=${this.props.pageLimit}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&apiKey=445f58e1d17c4229b23e3965d19197c7&category=${this.props.category}&page=${this.state.page + 1}&pagesize=${this.props.pageLimit}`;
     
     this.setState({
       loading: true,
@@ -68,7 +69,6 @@ export default class News extends Component {
       >
         <div className='container'>
           <div className='row'>
-            {/* {this.state.loading && <Spinner />} */}
             {
               this.state.articles.map((elem) => {
                 return <div className='col-md-4'>
