@@ -11,12 +11,12 @@ export default class App extends Component {
         <Navbar />
         <Routes>
 
-          <Route exact path="/" key="everything" element={<News/>} />
-          <Route exact path="/general" key="general" element={<News category={'general'} />} />
-          <Route exact path="/sports" key="sports" element={<News category={'sports'} />} />
-          <Route exact path="/entertainment" key="entertainment" element={<News category={'entertainment'} />} />
-          <Route exact path="/health" key="health" element={<News category={'health'} />} />
-          <Route exact path="/science" key="science" element={<News category={'science'} />} />
+          <Route exact path="/general"  element={<News key="general" category={'general'} />} />
+          <Route exact path="/sports" element={<News key="sports" category={'sports'} />} />
+          <Route exact path="/entertainment" element={<News key="entertainment" category={'entertainment'} />} />
+          <Route exact path="/health" element={<News key="health" category={'health'} />} />
+          <Route exact path="/science" element={<News key="science" category={'science'} />} />
+          <Route exact path="/" element={<News key="everything" />} />
 
         </Routes>
 

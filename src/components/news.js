@@ -40,8 +40,6 @@ export default class News extends Component {
     });
   }
 
-
-
   fetchData = async () => {
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&apiKey=445f58e1d17c4229b23e3965d19197c7&category=${this.props.category}&page=${this.state.page + 1}&pagesize=${this.props.pageLimit}`;
     
@@ -58,9 +56,16 @@ export default class News extends Component {
     });
   }
 
+   capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   render() {
     return (<>
-
+      <h1>
+        {this.capitalize(this.props.category)}-Top Headlines
+      </h1>
+      
       <InfiniteScroll
         dataLength={this.state.articles.length}
         next={this.fetchData}
@@ -71,8 +76,8 @@ export default class News extends Component {
           <div className='row'>
             {
               this.state.articles.map((elem) => {
-                return <div className='col-md-4'>
-                  <Newscomp title={elem.title ? elem.title.slice(0, 30) : ""} url={elem.url} imgUrl={elem.urlToImage} description={elem.content ? elem.content.slice(0, 40) : ""} />
+                return <div className='col-md-4' key={elem.url}>
+                  <Newscomp title={elem.title ? elem.title.slice(0, 50) : ""} url={elem.url} imgUrl={elem.urlToImage} description={elem.content ? elem.content.slice(0, 40) : ""} />
                 </div>
               })
             }
