@@ -17,11 +17,14 @@ export default class News extends Component {
 
   static propTypes = {
     pageLimit: PropTypes.number.isRequired,
-    country: PropTypes.string.isRequired
+    country: PropTypes.string.isRequired,
+    category:PropTypes.string,
+    item:PropTypes.string
   }
 
-  constructor() {
+  constructor(props) {
     super();
+    props.setItem('')
     this.state = {
       articles: [],
       loading: true,
@@ -67,7 +70,7 @@ export default class News extends Component {
         totalResults: 1,
         pageSize: 1
       })
-      let url = `https://newsapi.org/v2/everything?q=${this.props.item}&apiKey=${this.props.apiKey}`;
+      let url = `https://newsapi.org/v2/everything?q=${this.props.item}&apiKey=${this.props.apiKey}&page=1&pagesize=${this.props.pageLimit}`;
       this.fetchInitialData(url);
     }
   }
@@ -79,7 +82,7 @@ export default class News extends Component {
       url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&apiKey=${this.props.apiKey}&category=${this.props.category}&page=${this.state.page + 1}&pagesize=${this.props.pageLimit}`;
     }
     else {
-      url = `https://newsapi.org/v2/everything?q=${this.props.item}&apiKey=${this.props.apiKey}`;
+      url = `https://newsapi.org/v2/everything?q=${this.props.item}&apiKey=${this.props.apiKey}&page=${this.state.page + 1}&pagesize=${this.props.pageLimit}`;
     }
     this.setState({
       page: this.state.page + 1,
@@ -102,14 +105,14 @@ export default class News extends Component {
     return (<>
       
       <h1 style={{ textAlign: 'center', margin: '70px 0px 25px 0px' }}>
-        {this.props.item===""?this.capitalize(this.props.category).concat('-Top Headlines'):'Search Results for '+this.props.item}
+        {this.props.item===""?this.capitalize(this.props.category).concat('-Top Headlines'):"Search Results for '"+this.props.item+"'"}
       </h1>
       
 
       <InfiniteScroll
         dataLength={this.state.articles.length}
         next={this.fetchData}
-        hasMore={this.state.articles.length !== this.state.totalResults-1}
+        hasMore={this.state.articles.length !== this.state.totalResults}
         loader={<Spinner />}
       >
         <div className='container'>
