@@ -27,12 +27,35 @@
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
-
+      
       You can add webfonts, meta tags, or analytics to this file.
       The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
+        
+        To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+        <script type="module">
+          // Import the functions you need from the SDKs you need
+          import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
+          import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-analytics.js";
+          // TODO: Add SDKs for Firebase products that you want to use
+          // https://firebase.google.com/docs/web/setup#available-libraries
+        
+          // Your web app's Firebase configuration
+          // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+          const firebaseConfig = {
+            apiKey: "AIzaSyDrT5lP5XQ6VafPN9O5oC5pd1eW1VpyJTY",
+            authDomain: "news74-68318.firebaseapp.com",
+            projectId: "news74-68318",
+            storageBucket: "news74-68318.appspot.com",
+            messagingSenderId: "407426223230",
+            appId: "1:407426223230:web:6630a7c88c9a07e7b11c2f",
+            measurementId: "G-1DVFSK3MG4"
+          };
+        
+          // Initialize Firebase
+          const app = initializeApp(firebaseConfig);
+          const analytics = getAnalytics(app);
+        </script>
   </body>
 </html>
