@@ -10,7 +10,7 @@ export default class News extends Component {
 
   static defaultProps = {
     pageLimit: 6,
-    category: '',
+    category: 'general',
     country: 'in',
     item: ''
   }
@@ -24,6 +24,7 @@ export default class News extends Component {
 
   constructor(props) {
     super();
+    document.title=`News 74 - ${this.capitalize(props.category)}`
     props.setItem('')
     this.state = {
       articles: [],
@@ -62,7 +63,6 @@ export default class News extends Component {
   async componentDidUpdate(prevProps) {
 
     if (prevProps.item !== this.props.item) {
-      console.log('componentDidUpdate')
       this.setState({
         articles: [],
         loading: true,
@@ -73,9 +73,11 @@ export default class News extends Component {
       let url;
       if (this.props.item === '') {
         url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&apiKey=${this.props.apiKey}&category=${this.props.category}&page=1&pagesize=${this.props.pageLimit}`;
+        document.title=`News 74 - ${this.capitalize(this.props.category)}`;
       }
       else {
         url = `https://newsapi.org/v2/everything?q=${this.props.item}&apiKey=${this.props.apiKey}&page=1&pagesize=${this.props.pageLimit}`;
+        document.title=`News 74 - Search`;
       }
       this.fetchInitialData(url);
     }
