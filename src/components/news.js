@@ -54,7 +54,7 @@ export default class News extends Component {
   }
 
   async componentDidMount() {
-
+    this.props.setItem("");
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&apiKey=${this.props.apiKey}&category=${this.props.category}&page=1&pagesize=${this.props.pageLimit}`;
     this.fetchInitialData(url);
   }
@@ -70,7 +70,13 @@ export default class News extends Component {
         totalResults: 1,
         pageSize: 1
       })
-      let url = `https://newsapi.org/v2/everything?q=${this.props.item}&apiKey=${this.props.apiKey}&page=1&pagesize=${this.props.pageLimit}`;
+      let url;
+      if (this.props.item === '') {
+        url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&apiKey=${this.props.apiKey}&category=${this.props.category}&page=1&pagesize=${this.props.pageLimit}`;
+      }
+      else {
+        url = `https://newsapi.org/v2/everything?q=${this.props.item}&apiKey=${this.props.apiKey}&page=1&pagesize=${this.props.pageLimit}`;
+      }
       this.fetchInitialData(url);
     }
   }
@@ -117,6 +123,7 @@ export default class News extends Component {
       >
         <div className='container'>
           <div className='row'>
+            
             {
               this.state.articles.map((elem) => {
                 return <div className='col-md-4' key={elem.url}>
